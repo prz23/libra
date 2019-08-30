@@ -20,7 +20,7 @@ proptest-derive = { version = "0.1.2", default-features = false }
 protobuf = "~2.8"
 radix_trie = { version = "0.1.4", default-features = false }
 rand = "0.6.5"
-serde = { version = "1.0.99", default-features = false }
+serde = { version = "1.0.97", default-features = false }
 tiny-keccak = { version = "1.5.0", default-features = false }
 
 canonical_serialization = { path = "../common/canonical_serialization" }

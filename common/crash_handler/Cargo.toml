@@ -11,4 +11,4 @@ backtrace = "0.3.34"
 toml = "0.5.3"
 
 logger = { path = "../logger" }
-serde = { version = "1.0.96", features = ["derive"] }
+serde = { version = "1.0.97", features = ["derive"] }

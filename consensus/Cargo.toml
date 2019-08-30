@@ -20,7 +20,7 @@ protobuf = "~2.8"
 rand = { version = "0.7.0", default-features = false }
 rmp-serde = { version = "0.13.7", default-features = false }
 rusty-fork = { version = "0.2.2", default-features = false }
-serde = { version = "1.0.99", default-features = false }
+serde = { version = "1.0.97", default-features = false }
 serde_json = "1.0"
 siphasher = { version = "0.3.0", default-features = false }
 termion = { version = "1.5.3", default-features = false }

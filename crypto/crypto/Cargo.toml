@@ -20,7 +20,7 @@ pairing = "0.14.2"
 proptest = "0.9.1"
 proptest-derive = "0.1.0"
 rand = "0.6.5"
-serde = { version = "1.0.96", features = ["derive"] }
+serde = { version = "1.0.97", features = ["derive"] }
 sha2 = "0.8.0"
 sha3 = "0.8.2"
 threshold_crypto = "0.3"
