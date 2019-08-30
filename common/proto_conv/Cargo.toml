@@ -14,7 +14,7 @@ proto_conv_derive = { path = "proto_conv_derive", optional = true }
 [dev-dependencies]
 proptest = "0.9.2"
 proptest-derive = "0.1.0"
-protobuf = "~2.7"
+protobuf = "~2.8"
 
 proto_conv = { path = ".", features = ["derive"] }
 
