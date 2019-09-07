@@ -36,4 +36,4 @@ types = { path = "../../types", features = ["testing"] }
 
 [features]
 default = ["testing"]
-testing = ["crypto"]
+testing = ["crypto/testing"]
