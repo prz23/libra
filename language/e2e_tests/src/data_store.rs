@@ -46,7 +46,7 @@ pub struct FakeDataStore {
     data: HashMap<AccessPath, Vec<u8>>,
 }
 
-trait GetHashMap{
+pub trait GetHashMap{
     fn get_hash_map(&mut self) -> HashMap<AccessPath, Vec<u8>>;
     fn set_hash_map(&mut self , hashmap:HashMap<AccessPath, Vec<u8>>);
 }
@@ -55,7 +55,7 @@ impl GetHashMap for FakeDataStore {
     fn get_hash_map(&mut self) -> HashMap<AccessPath, Vec<u8>>{
         self.data.clone()
     }
-    
+
     fn set_hash_map(&mut self , hashmap:HashMap<AccessPath, Vec<u8>> ) {
         self.data = hashmap;
     }
