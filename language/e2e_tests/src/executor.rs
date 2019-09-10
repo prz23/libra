@@ -26,8 +26,8 @@ use vm_runtime::{MoveVM, VMExecutor, VMVerifier};
 /// This struct is a mock in-memory implementation of the Libra executor.
 #[derive(Debug)]
 pub struct FakeExecutor {
-    config: NodeConfig,
-    data_store: FakeDataStore,
+    pub config: NodeConfig,
+    pub data_store: FakeDataStore,
 }
 
 impl FakeExecutor {
