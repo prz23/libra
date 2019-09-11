@@ -46,7 +46,8 @@ pub const ED25519_PUBLIC_KEY_LENGTH: usize = ed25519_dalek::PUBLIC_KEY_LENGTH;
 pub const ED25519_SIGNATURE_LENGTH: usize = ed25519_dalek::SIGNATURE_LENGTH;
 
 /// An Ed25519 private key
-#[derive(SilentDisplay, SilentDebug)]
+//#[derive(SilentDisplay, SilentDebug)]
+#[derive(Clone, Debug)]
 pub struct Ed25519PrivateKey(ed25519_dalek::SecretKey);
 
 /// An Ed25519 public key
