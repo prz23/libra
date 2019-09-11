@@ -30,6 +30,7 @@ vm_genesis = { path = "../vm/vm_genesis" }
 config =  { path = "../../config" }
 logger = { path = "../../common/logger" }
 stdlib = { path = "../stdlib" }
+serde = { version = "1.0.97", default-features = false }
 
 [dev-dependencies]
 types = { path = "../../types", features = ["testing"] }

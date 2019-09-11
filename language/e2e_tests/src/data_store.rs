@@ -18,7 +18,7 @@ use types::{
 };
 use vm::{errors::*, CompiledModule};
 use vm_runtime::data_cache::RemoteCache;
-
+use serde::{Deserialize, Serialize};
 lazy_static! {
     /// The write set encoded in the genesis transaction.
     pub static ref GENESIS_WRITE_SET: WriteSet = {
