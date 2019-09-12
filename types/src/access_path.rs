@@ -251,7 +251,7 @@ lazy_static! {
     FromProto,
     IntoProto,
 )]
-#[cfg_attr(any(test, feature = "testing"), derive(Arbitrary, Serialize, Deserialize))]
+#[cfg_attr(any(test, feature = "testing"), derive(Arbitrary))]
 #[ProtoType(crate::proto::access_path::AccessPath)]
 pub struct AccessPath {
     pub address: AccountAddress,
