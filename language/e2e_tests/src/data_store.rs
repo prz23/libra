@@ -41,7 +41,8 @@ lazy_static! {
 ///
 /// Tests use this to set up state, and pass in a reference to the cache whenever a `StateView` or
 /// `RemoteCache` is needed.
-#[derive(Debug, Default,Clone,Serialize, Deserialize)]
+//#[derive(Debug, Default,Clone,Serialize, Deserialize)]
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Hash, Default, Clone, Serialize, Deserialize, Copy)]
 pub struct FakeDataStore {
     data: HashMap<AccessPath, Vec<u8>>,
 }
