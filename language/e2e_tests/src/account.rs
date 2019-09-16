@@ -58,6 +58,16 @@ impl Account {
         Self::with_keypair(privkey, pubkey)
     }
 
+    pub fn fixed_new_account() -> Self {
+        let vec =  [77u8, 180, 239, 25, 146, 136, 157, 68
+            , 40, 228, 0, 190, 52, 40, 132, 61, 182, 232, 155, 178, 232, 170, 244, 206, 142, 254, 0, 223, 100, 1, 37, 68];
+        let privkey:Ed25519PrivateKey = Ed25519PrivateKey::try_from(vec);
+        let pubkey:Ed25519PublicKey = Ed25519PublicKey::from(&privkey.clone());
+        //here is a  key pair
+        Self::with_keypair(privkey, pubkey)
+    }
+
+
     /// Creates a new account with the given keypair.
     ///
     /// Like with [`Account::new`], the account returned by this constructor is a purely logical
