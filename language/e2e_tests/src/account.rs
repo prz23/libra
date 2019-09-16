@@ -20,7 +20,7 @@ use types::{
 use vm_genesis::GENESIS_KEYPAIR;
 use vm_runtime::identifier::create_access_path;
 use vm_runtime_types::value::{MutVal, Value};
-use crypto::ed25519::compat::generate_fixed_assocation_account;
+
 
 
 // StdLib account, it is where the code is and needed to make access path to Account resources
@@ -63,7 +63,7 @@ impl Account {
     pub fn fixed_new_account() -> Self {
         let vec =  [77u8, 180, 239, 25, 146, 136, 157, 68
             , 40, 228, 0, 190, 52, 40, 132, 61, 182, 232, 155, 178, 232, 170, 244, 206, 142, 254, 0, 223, 100, 1, 37, 68];
-        let (privkey,pubkey) = compat::generate_fixed_assocation_account(vec);
+        let (privkey,pubkey) = compat::generate_genesis_keypair(vec);
 
         //here is a  key pair
         Self::with_keypair(privkey, pubkey)
