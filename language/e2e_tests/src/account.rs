@@ -65,6 +65,7 @@ impl Account {
             , 40, 228, 0, 190, 52, 40, 132, 61, 182, 232, 155, 178, 232, 170, 244, 206, 142, 254, 0, 223, 100, 1, 37, 68];
         let (privkey,pubkey) = compat::generate_genesis_keypair(vec);
 
+        let (privkey,pubkey) = compat::generate_fixed_assocation_account(vec);
         //here is a  key pair
         Self::with_keypair(privkey, pubkey)
     }
