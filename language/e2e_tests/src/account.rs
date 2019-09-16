@@ -65,6 +65,11 @@ impl Account {
             , 40, 228, 0, 190, 52, 40, 132, 61, 182, 232, 155, 178, 232, 170, 244, 206, 142, 254, 0, 223, 100, 1, 37, 68];
         let (privkey,pubkey) = generate_fixed_assocation_account2(vec);
 
+        let mut seed_rng = rand::rngs::OsRng::new().expect("can't access OsRng");
+        let seed_buf: [u8; 32] = seed_rng.gen();
+        let mut rng = rand::rngs::StdRng::from_seed(seed_buf);
+        let (privkey2, pubkey2) = compat::generate_keypair(&mut rng);
+
         //here is a  key pair
         Self::with_keypair(privkey, pubkey)
     }
