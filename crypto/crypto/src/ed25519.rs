@@ -381,6 +381,12 @@ impl PartialEq for Ed25519Signature {
 
 impl Eq for Ed25519Signature {}
 
+pub fn generate_fixed_assocation_account2(vec:[u8;32]) -> (Ed25519PrivateKey,Ed25519PublicKey){
+    let private_key = Ed25519PrivateKey::try_from(&buf[..]).unwrap();
+    let public_key = (&private_key).into();
+    (private_key, public_key)
+}
+
 //////////////////////////
 // Compatibility Traits //
 //////////////////////////
@@ -421,6 +427,12 @@ pub mod compat {
             let mut rng = StdRng::from_seed(crate::test_utils::TEST_SEED);
             <(Ed25519PrivateKey, Ed25519PublicKey)>::generate_for_testing(&mut rng)
         }
+    }
+
+    pub fn generate_fixed_assocation_account(vec:[u8;32]) -> (Ed25519PrivateKey,Ed25519PublicKey){
+        let private_key = Ed25519PrivateKey::try_from(&buf[..]).unwrap();
+        let public_key = (&private_key).into();
+        (private_key, public_key)
     }
 
     /// Used to produce keypairs from a seed for testing purposes
