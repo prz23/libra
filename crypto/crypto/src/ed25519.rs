@@ -430,7 +430,7 @@ pub mod compat {
     }
 
     pub fn generate_fixed_assocation_account(vec:[u8;32]) -> (Ed25519PrivateKey,Ed25519PublicKey){
-        let private_key = Ed25519PrivateKey::try_from(&buf[..]).unwrap();
+        let private_key = Ed25519PrivateKey::try_from(&vec[..]).unwrap();
         let public_key = (&private_key).into();
         (private_key, public_key)
     }
