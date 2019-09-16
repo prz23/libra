@@ -20,6 +20,8 @@ use types::{
 use vm_genesis::GENESIS_KEYPAIR;
 use vm_runtime::identifier::create_access_path;
 use vm_runtime_types::value::{MutVal, Value};
+use crypto::ed25519::compat::generate_fixed_assocation_account;
+
 
 // StdLib account, it is where the code is and needed to make access path to Account resources
 lazy_static! {
