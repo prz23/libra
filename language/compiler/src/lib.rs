@@ -125,7 +125,7 @@ impl<'a> Compiler<'a> {
 
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
     pub fn into_program_2(mut self, args: Vec<TransactionArgument>,deps:Vec<CompiledModule>) -> Result<Program> {
-        let compiled_program = self.compile_impl_2(deps)?.0;
+        let compiled_program = self.compile_impl_2(deps)?;
 
         let mut serialized_script = Vec::<u8>::new();
         compiled_program.script.serialize(&mut serialized_script)?;
