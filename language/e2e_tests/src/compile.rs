@@ -8,6 +8,7 @@ use types::{
     account_address::AccountAddress,
     transaction::{Program, TransactionArgument},
 };
+use bytecode_verifier::VerifiedModule;
 
 /// Compile the provided Move code into a blob which can be used as the code for a [`Program`] or
 /// a [`Script`].
@@ -45,6 +46,22 @@ pub fn compile_program_with_address(
     };
     compiler.into_program(args).unwrap()
 }
+
+pub fn compile_program_with_address_with_deps(
+    address: &AccountAddress,
+    code: &str,
+    args: Vec<TransactionArgument>,
+    deps:Vec<VerifiedModule>
+) -> Program {
+    let compiler = Compiler {
+        address: *address,
+        code,
+        ..Compiler::default()
+    };
+    compiler.add_deps(deps);
+    compiler.into_program(args).unwrap()
+}
+
 
 /// Compile the provided Move code and arguments into a `Program`.
 ///
