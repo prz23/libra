@@ -100,12 +100,12 @@ impl<'a> Compiler<'a> {
         let mut serialized_script = Vec::<u8>::new();
         compiled_program.script.serialize(&mut serialized_script)?;
         let mut serialized_modules = vec![];
-        for m in compiled_program.modules {
+        for m in compiled_program.modules.clone() {
             let mut module = vec![];
             m.serialize(&mut module).expect("module must serialize");
             serialized_modules.push(module);
         }
-        Ok((Program::new(serialized_script, serialized_modules, args),deps,compiled_program.modules))
+        Ok((Program::new(serialized_script, serialized_modules, args),deps,compiled_program.modules.clone()))
     }
 
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
