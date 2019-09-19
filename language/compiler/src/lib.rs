@@ -48,7 +48,7 @@ pub struct Compiler<'a> {
 
 impl<'a> Compiler<'a> {
 
-    pub fn add_deps(mut self,deps: Vec<VerifiedModule>){
+    pub fn add_deps(&mut self,deps: Vec<VerifiedModule>){
         self.extra_deps = deps;
     }
 

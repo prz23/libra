@@ -66,7 +66,7 @@ pub fn compile_program_with_address_with_deps(
     args: Vec<TransactionArgument>,
     deps:Vec<VerifiedModule>
 ) -> Program {
-    let compiler = Compiler {
+    let mut compiler = Compiler {
         address: *address,
         code,
         ..Compiler::default()
