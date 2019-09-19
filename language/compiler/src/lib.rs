@@ -9,7 +9,7 @@ mod unit_tests;
 use bytecode_verifier::VerifiedModule;
 use failure::prelude::*;
 use ir_to_bytecode::{
-    compiler::{compile_module, compile_program},
+    compiler::{compile_module, compile_program,compile_program_2},
     parser::parse_program,
 };
 use std::mem;
@@ -94,7 +94,7 @@ impl<'a> Compiler<'a> {
     }
 
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
-    pub fn into_program_and_deps(mut self, args: Vec<TransactionArgument>) -> Result<(Program, Vec<VerifiedModule>)>  {
+    pub fn into_program_and_deps(mut self, args: Vec<TransactionArgument>) -> Result<(Program, Vec<VerifiedModule>,Vec<CompiledModule>)>  {
         let (compiled_program,deps) = self.compile_impl()?;
 
         let mut serialized_script = Vec::<u8>::new();
@@ -105,7 +105,7 @@ impl<'a> Compiler<'a> {
             m.serialize(&mut module).expect("module must serialize");
             serialized_modules.push(module);
         }
-        Ok((Program::new(serialized_script, serialized_modules, args),deps))
+        Ok((Program::new(serialized_script, serialized_modules, args),deps,compiled_program.modules))
     }
 
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
@@ -121,6 +121,28 @@ impl<'a> Compiler<'a> {
             serialized_modules.push(module);
         }
         Ok(Program::new(serialized_script, serialized_modules, args))
+    }
+
+    /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
+    pub fn into_program_2(mut self, args: Vec<TransactionArgument>,deps:Vec<CompiledModule>) -> Result<Program> {
+        let compiled_program = self.compile_impl_2(deps)?.0;
+
+        let mut serialized_script = Vec::<u8>::new();
+        compiled_program.script.serialize(&mut serialized_script)?;
+        let mut serialized_modules = vec![];
+        for m in compiled_program.modules {
+            let mut module = vec![];
+            m.serialize(&mut module).expect("module must serialize");
+            serialized_modules.push(module);
+        }
+        Ok(Program::new(serialized_script, serialized_modules, args))
+    }
+
+    fn compile_impl_2(&mut self,deps:Vec<CompiledModule>) -> Result<CompiledProgram> {
+        let parsed_program = parse_program(self.code)?;
+        //let deps = self.deps();
+        let compiled_program = compile_program_2(&self.address, &parsed_program, &deps)?;
+        Ok(compiled_program)
     }
 
     fn compile_impl(&mut self) -> Result<(CompiledProgram, Vec<VerifiedModule>)> {
