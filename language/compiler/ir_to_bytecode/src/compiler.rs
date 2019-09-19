@@ -1183,7 +1183,7 @@ pub fn compile_program_2<'a, T: 'a + ModuleAccess>(
     deps: impl IntoIterator<Item = &'a T>,
 ) -> Result<CompiledProgram> {
     // Normalize into a Vec<&CompiledModule>.
-    //let deps: Vec<&CompiledModule> = deps.into_iter().map(|dep| dep.as_module()).collect();
+    let deps: Vec<&CompiledModule> = deps.into_iter().map(|dep| dep.as_module()).collect();
 
     // This is separate to avoid unnecessary code gen due to monomorphization.
     compile_program_impl(address, program, deps)
