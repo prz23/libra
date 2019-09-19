@@ -47,6 +47,11 @@ pub struct Compiler<'a> {
 }
 
 impl<'a> Compiler<'a> {
+
+    pub fn add_deps(mut self,deps: Vec<VerifiedModule>){
+        self.extra_deps = deps;
+    }
+
     /// Compiles into a `CompiledProgram` where the bytecode hasn't been serialized.
     pub fn into_compiled_program(mut self) -> Result<CompiledProgram> {
         Ok(self.compile_impl()?.0)
