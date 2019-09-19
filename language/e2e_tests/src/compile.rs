@@ -47,6 +47,19 @@ pub fn compile_program_with_address(
     compiler.into_program(args).unwrap()
 }
 
+pub fn compile_program_with_address_return_deps (
+    address: &AccountAddress,
+    code: &str,
+    args: Vec<TransactionArgument>,
+) -> (Program,Vec<VerifiedModule>) {
+    let compiler = Compiler {
+        address: *address,
+        code,
+        ..Compiler::default()
+    };
+    compiler.into_compiled_program_and_deps().unwrap()
+}
+
 pub fn compile_program_with_address_with_deps(
     address: &AccountAddress,
     code: &str,
