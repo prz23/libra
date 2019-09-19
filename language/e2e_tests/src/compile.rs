@@ -57,7 +57,7 @@ pub fn compile_program_with_address_return_deps (
         code,
         ..Compiler::default()
     };
-    compiler.into_compiled_program_and_deps().unwrap()
+    compiler.into_program_and_deps(args).unwrap()
 }
 
 pub fn compile_program_with_address_with_deps(

@@ -94,6 +94,21 @@ impl<'a> Compiler<'a> {
     }
 
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
+    pub fn into_program_and_deps(mut self, args: Vec<TransactionArgument>) -> Result<(Program, Vec<VerifiedModule>)>  {
+        let (compiled_program,deps) = self.compile_impl()?;
+
+        let mut serialized_script = Vec::<u8>::new();
+        compiled_program.script.serialize(&mut serialized_script)?;
+        let mut serialized_modules = vec![];
+        for m in compiled_program.modules {
+            let mut module = vec![];
+            m.serialize(&mut module).expect("module must serialize");
+            serialized_modules.push(module);
+        }
+        Ok((Program::new(serialized_script, serialized_modules, args),deps))
+    }
+
+    /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
     pub fn into_program(mut self, args: Vec<TransactionArgument>) -> Result<Program> {
         let compiled_program = self.compile_impl()?.0;
 
