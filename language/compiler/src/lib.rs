@@ -127,7 +127,7 @@ impl<'a> Compiler<'a> {
     pub fn into_program_2(mut self, args: Vec<TransactionArgument>,deps:Vec<CompiledModule>) -> Result<Program> {
         //self.add_deps(deps.into());
         self.deps();
-        let compiled_program = self.compile_impl_2(self.extra_deps.clone())?;
+        let compiled_program = self.compile_impl_2(/*self.extra_deps.clone()*/deps)?;
 
         let mut serialized_script = Vec::<u8>::new();
         compiled_program.script.serialize(&mut serialized_script)?;
@@ -140,7 +140,7 @@ impl<'a> Compiler<'a> {
         Ok(Program::new(serialized_script, serialized_modules, args))
     }
 
-    fn compile_impl_2(&mut self,deps:Vec<VerifiedModule>) -> Result<CompiledProgram> {
+    fn compile_impl_2(&mut self,deps:Vec<CompiledModule>) -> Result<CompiledProgram> {
         let parsed_program = parse_program(self.code)?;
         //let deps = self.deps();
         let compiled_program = compile_program_2(&self.address, &parsed_program, &deps)?;
