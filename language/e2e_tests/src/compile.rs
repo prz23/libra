@@ -70,6 +70,7 @@ pub fn compile_program_with_address_with_deps(
     let depsv = VerifiedModule::constract(deps[0].clone());
     let mut compiler = Compiler {
         address: *address,
+        skip_stdlib_deps:false,
         code,
         extra_deps:vec![depsv],
         ..Compiler::default()
