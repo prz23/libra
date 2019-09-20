@@ -126,8 +126,8 @@ impl<'a> Compiler<'a> {
     /// Compiles the code and arguments into a `Program` -- the bytecode is serialized.
     pub fn into_program_2(mut self, args: Vec<TransactionArgument>,deps:Vec<CompiledModule>) -> Result<Program> {
         //self.add_deps(deps.into());
-        self.deps();
-        let compiled_program = self.compile_impl_2(/*self.extra_deps.clone()*/deps)?;
+        let deps_std = self.add_std_deps(self.extra_deps.clone() );
+        let compiled_program = self.compile_impl_2(deps_std)?;
 
         let mut serialized_script = Vec::<u8>::new();
         compiled_program.script.serialize(&mut serialized_script)?;
@@ -140,7 +140,7 @@ impl<'a> Compiler<'a> {
         Ok(Program::new(serialized_script, serialized_modules, args))
     }
 
-    fn compile_impl_2(&mut self,deps:Vec<CompiledModule>) -> Result<CompiledProgram> {
+    fn compile_impl_2(&mut self,deps:Vec<VerifiedModule>) -> Result<CompiledProgram> {
         let parsed_program = parse_program(self.code)?;
         //let deps = self.deps();
         let compiled_program = compile_program_2(&self.address, &parsed_program, &deps)?;
@@ -173,4 +173,13 @@ impl<'a> Compiler<'a> {
             deps
         }
     }
+
+    pub fn add_std_deps(&mut self,mut deps2:  Vec<VerifiedModule>) -> Vec<VerifiedModule> {
+        let extra_deps = mem::replace(&mut deps2, vec![]);
+
+            let mut deps = stdlib_modules().to_vec();
+            deps.extend(extra_deps);
+            deps
+    }
+
 }
