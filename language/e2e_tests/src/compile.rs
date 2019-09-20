@@ -70,6 +70,7 @@ pub fn compile_program_with_address_with_deps(
     let mut compiler = Compiler {
         address: *address,
         code,
+        extra_deps:deps.into(),
         ..Compiler::default()
     };
     //compiler.add_deps(deps);
