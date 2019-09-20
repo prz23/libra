@@ -65,12 +65,15 @@ pub fn compile_program_with_address_with_deps(
     address: &AccountAddress,
     code: &str,
     args: Vec<TransactionArgument>,
-    deps:Vec<CompiledModule>
+    mut deps:Vec<CompiledModule>
 ) -> Program {
+    let deps_v:CompiledModule = deps.pop().unwrap();
+    let deps_v2 = VerifiedModule(deps_v);
+    let deps_v3 = vec![deps_v2];
     let mut compiler = Compiler {
         address: *address,
         code,
-        extra_deps:deps.into(),
+        extra_deps:deps_v3,
         ..Compiler::default()
     };
     //compiler.add_deps(deps);
