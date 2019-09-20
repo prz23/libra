@@ -183,7 +183,7 @@ impl VerifiedModule {
         }
     }
 
-    pub fn constract(module: CompiledModule) -> VerifiedModule(module) {
+    pub fn constract(module: CompiledModule) -> VerifiedModule {
         VerifiedModule(module)
     }
     /// Returns a new `VerifiedModule` that **does not do any verification.**
