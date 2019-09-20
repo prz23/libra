@@ -67,9 +67,7 @@ pub fn compile_program_with_address_with_deps(
     args: Vec<TransactionArgument>,
     mut deps:Vec<CompiledModule>
 ) -> Program {
-    let deps_v:CompiledModule = deps.pop().unwrap();
-    let deps_v2 = VerifiedModule::new(deps_v).unwrap();
-    let deps_v3 = vec![deps_v2];
+    let depsv = VerifiedModule::constract(deps[0].clone());
     let mut compiler = Compiler {
         address: *address,
         code,
